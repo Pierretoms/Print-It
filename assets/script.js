@@ -17,12 +17,30 @@ const slides = [
 	}
 ]
 
-const flechesgauche = document.querySelector(".arrow_left");
-flechesgauche.addEventListener("click",function(events){
+const arrow_left = document.querySelector(".arrow_left");
+const arrow_right = document.querySelector(".arrow_right");
+const dot = document.querySelectorAll('.dot');
+let actifIndex = 0;
+
+arrow_left.addEventListener("click",function(){
+	actifIndex = (actifIndex - 1);
+	mooveDot(actifIndex)
 	console.log("flèches gauche cliqué !");
 });
 
-const flechesdroite = document.querySelector(".arrow_right");
-flechesdroite.addEventListener("click",function(events){
+
+arrow_right.addEventListener("click",function(){
+	actifIndex = (actifIndex + 1);
+	mooveDot(actifIndex)
 	console.log("flèches droite cliqué !");
 });
+
+function mooveDot(index) {
+    dot.forEach((dot, i) => {
+        if (i === index) {
+            dot.classList.add('dot_selected'); 
+        } else {
+            dot.classList.remove('dot_selected'); 
+        }
+    });
+}
