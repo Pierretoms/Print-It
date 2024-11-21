@@ -20,11 +20,13 @@ const slides = [
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
 const dot = document.querySelectorAll('.dot');
+const imgcarrousel = document.querySelector('.banner-img');
 let actifIndex = 0;
 
 arrow_left.addEventListener("click",function(){
 	actifIndex = (actifIndex - 1);
 	mooveDot(actifIndex)
+	carrousel(actifIndex, 'left')
 	console.log("flèches gauche cliqué !");
 });
 
@@ -32,6 +34,7 @@ arrow_left.addEventListener("click",function(){
 arrow_right.addEventListener("click",function(){
 	actifIndex = (actifIndex + 1);
 	mooveDot(actifIndex)
+	carrousel(actifIndex, 'right')
 	console.log("flèches droite cliqué !");
 });
 
@@ -43,4 +46,13 @@ function mooveDot(index) {
             dot.classList.remove('dot_selected'); 
         }
     });
+}
+
+function carrousel(index, direction) {
+
+  const imgSlide = `assets/images/slideshow/${slides[actifIndex].image}`;
+  imgcarrousel.src = imgSlide;
+
+  const txtSlide = slides[actifIndex].tagLine;
+  document.querySelector('p').innerHTML = txtSlide;
 }
