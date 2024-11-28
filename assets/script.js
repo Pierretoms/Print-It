@@ -14,45 +14,44 @@ const slides = [
 	{
 		"image":"slide4.png",
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
-	}
+	},
+	{
+		"image":"slide2.jpg",
+		"tagLine":"n'importe quoi"
+	},
 ]
 
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
-const dot = document.querySelectorAll('.dot');
+const dots = document.querySelector('.dots');
 const imgcarrousel = document.querySelector('.banner-img');
 let actifIndex = 0;
 
+slides.forEach((slide,actifIndex) => {
+	const tag = document.createElement('div');
+	tag.classList.add('dot')
+	dots.appendChild(tag)
+})
+
+const dot = document.querySelectorAll('.dot');
+
 arrow_left.addEventListener("click",function(){
-	actifIndex = (actifIndex - 1);
-	mooveDot(actifIndex)
+	actifIndex--;
 	carrousel(actifIndex, 'left')
-	console.log("flèches gauche cliqué !");
 });
 
 
 arrow_right.addEventListener("click",function(){
-	actifIndex = (actifIndex + 1);
-	mooveDot(actifIndex)
+	actifIndex++;
 	carrousel(actifIndex, 'right')
-	console.log("flèches droite cliqué !");
 });
 
-function mooveDot(index) {
-	dot.forEach((dot, i) => {
-		if (i === index) {
-			dot.classList.add('dot_selected'); 
-		} else {
-			dot.classList.remove('dot_selected'); 
-		}
-	});
-}
-
-function carrousel(index, direction) {
+function carrousel(index = actifIndex, direction = 'démarrage') {
 
 	if (actifIndex === -1 && direction === 'left') {
 		actifIndex = slides.length - 1;
-	} else if (actifIndex === slides.length && direction === 'right') {
+	} 
+	if (actifIndex === slides.length && direction === 'right') {
 		actifIndex = 0;
 	}
 	
@@ -62,8 +61,14 @@ function carrousel(index, direction) {
 	const txtSlide = slides[actifIndex].tagLine;
 	document.querySelector('p').innerHTML = txtSlide;
 
-	mooveDot(actifIndex);
+	dot.forEach((dot, i) => {
+		if (i === actifIndex) {
+			dot.classList.add('dot_selected'); 
+		} else {
+			dot.classList.remove('dot_selected'); 
+		}
+	});
 	
 }
 
-carrousel(actifIndex, 'démarrage');
+carrousel();
